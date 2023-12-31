@@ -16,10 +16,16 @@ class HandwrittenDigitRecognizer:
         x_test = tf.keras.utils.normalize(x_test, axis=1)
 
         model = tf.keras.models.Sequential()
+
+        # flatter input to 1d array from 28x28 and is also our input layer
         model.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
+
+        # 3 layers for treatement with each having 128 neurons
         model.add(tf.keras.layers.Dense(128, activation='relu'))
         model.add(tf.keras.layers.Dense(128, activation='relu'))
         model.add(tf.keras.layers.Dense(128, activation='relu'))
+
+        # output layer
         model.add(tf.keras.layers.Dense(10, activation='softmax'))
 
         model.compile(optimizer='adam',
